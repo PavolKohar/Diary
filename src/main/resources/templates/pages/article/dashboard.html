@@ -63,9 +63,10 @@
             <div class="col-7">
                 <h3 class="mb-3">MOOD ENTRIES</h3>
                 <div class="btn-group" role="group" aria-label="Basic button group">
-                    <button type="button" class="btn btn-primary">😃</button>
-                    <button type="button" class="btn btn-primary">😏</button>
-                    <button type="button" class="btn btn-primary">😞</button>
+                    <a th:href="@{/article/top-mood}" class="btn btn-primary">😃</a>
+                    <a th:href="@{/article/mid-mood}" class="btn btn-primary">😏</a>
+                    <a th:href="@{/article/low-mood}" class="btn btn-primary">😞</a>
+
                 </div>
 
                 <table class="table table-striped table-bordered align-middle">

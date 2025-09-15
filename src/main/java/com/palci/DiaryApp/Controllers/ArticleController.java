@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -32,6 +29,28 @@ public class ArticleController {
         model.addAttribute("allEntries",allEntries);
         List<ArticleDTO> topMoodEntries = articleService.getTopMoodEntries();
         model.addAttribute("moodTop",topMoodEntries);
+        return "pages/article/dashboard";
+    }
+
+    @GetMapping("/{filter}")
+    public String renderDashBoardWithFilterMood(@PathVariable String filter, Model model){
+        ArticleDTO lastEntry = articleService.findLastEntry();
+        model.addAttribute("lastEntry",lastEntry);
+        List<ArticleDTO> topEntries = articleService.getTopArticles();
+        model.addAttribute("topEntries",topEntries);
+        List<ArticleDTO> allEntries = articleService.getAllArticles();
+        model.addAttribute("allEntries",allEntries);
+
+        List<ArticleDTO> byMood;
+        switch (filter){
+            case "top-mood" -> byMood = articleService.getTopMoodEntries();
+            case "mid-mood" -> byMood = articleService.getMidMoodEntries();
+            case "low-mood" -> byMood = articleService.getLowMoodEntries();
+            default -> byMood = articleService.getAllArticles();
+        }
+
+        model.addAttribute("moodTop",byMood);
+
         return "pages/article/dashboard";
     }
 
