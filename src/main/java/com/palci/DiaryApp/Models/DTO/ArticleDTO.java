@@ -9,7 +9,7 @@ public class ArticleDTO {
 
     private long articleId;
 
-    private LocalDate date;
+    private LocalDate date; // TODO maybe add title
 
     @NotBlank(message = "Fill in the description")
     @Size(max = 140, message = "Description is too long")
