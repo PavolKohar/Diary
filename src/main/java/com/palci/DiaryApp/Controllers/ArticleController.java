@@ -19,6 +19,11 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
+    @GetMapping
+    public String renderDashBoard(){
+        return "pages/article/dashboard";
+    }
+
 
     @GetMapping("/create")
     public String renderCreateForm(@ModelAttribute ArticleDTO articleDTO){
@@ -33,7 +38,7 @@ public class ArticleController {
 
         articleService.createArticle(articleDTO);
 
-        return "pages/article/dashboard"; // TODO create dashboard.html
+        return "redirect:/article"; // TODO change to redirect
 
 
     }
