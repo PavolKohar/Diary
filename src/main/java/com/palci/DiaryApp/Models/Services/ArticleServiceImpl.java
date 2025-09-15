@@ -40,6 +40,21 @@ public class ArticleServiceImpl implements ArticleService{
                 .toList();
     }
 
+    @Override
+    public List<ArticleDTO> getAllArticles() {
+        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+                .map(e->articleMapper.toDto(e))
+                .toList();
+    }
+
+    @Override
+    public List<ArticleDTO> getTopMoodEntries() {
+        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+                .map(e->articleMapper.toDto(e))
+                .filter(d->d.getMood()>=7)
+                .toList();
+    }
+
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
         return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);

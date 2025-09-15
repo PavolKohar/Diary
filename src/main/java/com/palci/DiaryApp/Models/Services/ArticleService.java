@@ -11,4 +11,9 @@ public interface ArticleService {
     ArticleDTO findLastEntry();
 
     List<ArticleDTO> getTopArticles();
+
+    List<ArticleDTO> getAllArticles();
+
+    List<ArticleDTO> getTopMoodEntries();
+
 }

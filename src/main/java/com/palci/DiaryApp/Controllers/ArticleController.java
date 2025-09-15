@@ -28,6 +28,10 @@ public class ArticleController {
         model.addAttribute("lastEntry",lastEntry);
         List<ArticleDTO> topEntries = articleService.getTopArticles();
         model.addAttribute("topEntries",topEntries);
+        List<ArticleDTO> allEntries = articleService.getAllArticles();
+        model.addAttribute("allEntries",allEntries);
+        List<ArticleDTO> topMoodEntries = articleService.getTopMoodEntries();
+        model.addAttribute("moodTop",topMoodEntries);
         return "pages/article/dashboard";
     }
 

@@ -31,54 +31,92 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-4">
-                <h3>TOP ENTRIES</h3>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex" th:each="topEntry: ${topEntries}" >
-                            <div th:text="${topEntry.description}"></div>
-                        <a href="#" class="btn btn-primary">show</a>
-
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-8">
-                <h3>MOOD ENTRIES</h3>
-
-                <!-- Tabs or Pills can be used in a card with the help of .nav-{tabs|pills} and .card-header-{tabs|pills} classes -->
-                <div class="card">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">😃</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">😏</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="disabled-tab" data-bs-toggle="tab" href="#disabled" role="tab" aria-controls="disabled" tabindex="-1" aria-disabled="true">😞</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi alias praesentium illo omnis adipisci ipsa suscipit rerum quidem doloribus magnam?</div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, asperiores provident ea eaque quis omnis adipisci in exercitationem necessitatibus dolorem.</div>
-                            <div class="tab-pane fade" id="disabled" role="tabpanel" aria-labelledby="disabled-tab">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit rem accusamus officia quia eos ducimus consequuntur! Impedit aliquid vero suscipit.</div>
-                        </div>
-                    </div>
+            <div class="col-5 mx-auto">
+                <h3 class="mb-3">TOP ENTRIES</h3>
+                <div class="btn-group" role="group" aria-label="Basic button group">
+                    <a class="btn btn-primary" href="#">See all top records ⭐️</a>
                 </div>
 
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Description</th>
+                        <th>Mood</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
 
+                    <tbody>
+                    <tr th:each="topEntry : ${topEntries}">
+                        <td th:text="${topEntry.description}">Sample description</td>
+                        <td th:text="${topEntry.mood}">7</td>
+                        <td th:text="${topEntry.date}">2025-09-12</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">Show</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
+            <div class="col-7">
+                <h3 class="mb-3">MOOD ENTRIES</h3>
+                <div class="btn-group" role="group" aria-label="Basic button group">
+                    <button type="button" class="btn btn-primary">😃</button>
+                    <button type="button" class="btn btn-primary">😏</button>
+                    <button type="button" class="btn btn-primary">😞</button>
+                </div>
 
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Description</th>
+                        <th>Mood</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
 
-
+                    <tbody>
+                    <tr th:each="entry : ${moodTop}">
+                        <td th:text="${entry.description}">Sample description</td>
+                        <td th:text="${entry.mood}">7</td>
+                        <td th:text="${entry.date}">2025-09-12</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">Show</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
 
-
         </div>
+
+        <hr>
+        <h2>All entries</h2>
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+            <tr>
+                <th>Description</th>
+                <th>Mood</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="entry : ${allEntries}">
+                <td th:text="${entry.description}">Sample description</td>
+                <td th:text="${entry.mood}">7</td>
+                <td th:text="${entry.date}">2025-09-12</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-primary">Show</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 
