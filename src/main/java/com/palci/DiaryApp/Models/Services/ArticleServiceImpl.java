@@ -55,6 +55,22 @@ public class ArticleServiceImpl implements ArticleService{
                 .toList();
     }
 
+    @Override
+    public List<ArticleDTO> getMidMoodEntries() {
+        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+                .map(e->articleMapper.toDto(e))
+                .filter(d->d.getMood()<7 && d.getMood()>4)
+                .toList();
+    }
+
+    @Override
+    public List<ArticleDTO> getLowMoodEntries() {
+        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+                .map(e->articleMapper.toDto(e))
+                .filter(d->d.getMood()<=4)
+                .toList();
+    }
+
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
         return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);

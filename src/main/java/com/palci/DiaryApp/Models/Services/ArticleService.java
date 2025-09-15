@@ -16,4 +16,9 @@ public interface ArticleService {
 
     List<ArticleDTO> getTopMoodEntries();
 
+    List<ArticleDTO> getMidMoodEntries();
+
+    List<ArticleDTO> getLowMoodEntries();
+
+
 }
