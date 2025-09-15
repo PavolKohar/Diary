@@ -2,6 +2,7 @@ package com.palci.DiaryApp.Models.Services;
 
 import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
+import com.palci.DiaryApp.Models.Exceptions.ArticleNotFoundException;
 import com.palci.DiaryApp.data.Entities.ArticleEntity;
 import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,15 @@ public class ArticleServiceImpl implements ArticleService{
     public void createArticle(ArticleDTO articleDTO) {
         ArticleEntity entry = articleMapper.toEntity(articleDTO);
         articleRepository.save(entry);
+
+    }
+
+
+
+    // Helping method
+    private ArticleEntity getArticleOrThrow(long articleId){
+        return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);
+
 
     }
 }
