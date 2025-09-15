@@ -11,30 +11,32 @@
             <div class="card-body">
                 <h2 class="card-title mb-4">New Diary Entry</h2>
 
-                <form>
+                <form method="post"
+                      th:action="@{/article/create}"
+                th:object="${articleDTO}">
 
                     <!-- 1. Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Short Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="E.g. A beautiful walk in the park">
+                        <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="E.g. A beautiful walk in the park">
                     </div>
 
                     <!-- 2. Mood -->
                     <div class="mb-3">
                         <label for="mood" class="form-label">Mood (1 = bad, 10 = great): <span id="moodValue">5</span></label>
-                        <input type="range" class="form-range" min="1" max="10" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
+                        <input type="range" class="form-range" min="1" max="10" th:field="*{mood}" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
                     </div>
 
                     <!-- 3. Date -->
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="date">
+                        <input type="date" class="form-control" th:field="*{date}" id="date">
                     </div>
 
                     <!-- 4. Article -->
                     <div class="mb-3">
                         <label for="article" class="form-label">Your Thoughts</label>
-                        <textarea class="form-control" id="article" rows="6" placeholder="Write your full diary entry here..."></textarea>
+                        <textarea class="form-control" id="article" th:field="*{text}" rows="6" placeholder="Write your full diary entry here..."></textarea>
                     </div>
 
                     <!-- 5. Submit -->
