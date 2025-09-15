@@ -41,6 +41,12 @@
                         <small class="text-danger" th:errors="*{text}"></small>
                     </div>
 
+                    <!-- ✅ Checkbox for "Top" -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox" th:field="*{top}" class="form-check-input" id="top">
+                        <label class="form-check-label" for="top">Mark as Top</label>
+                    </div>
+
                     <!-- 5. Submit -->
                     <button type="submit" class="btn btn-primary">Save Entry</button>
 

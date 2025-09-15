@@ -24,6 +24,9 @@ public class ArticleEntity {
     @Column(nullable = false,columnDefinition = "TEXT")
     private String text;
 
+    @Column(nullable = false)
+    private boolean top;
+
     // TODO - Add owner id (join column) USER ENTITY
 
     // Getters and setters
@@ -67,5 +70,13 @@ public class ArticleEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isTop() {
+        return top;
+    }
+
+    public void setTop(boolean top) {
+        this.top = top;
     }
 }
