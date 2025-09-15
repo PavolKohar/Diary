@@ -4,10 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ArticleDTO {
 
     private long articleId;
+
+    private String title;
 
     private LocalDate date; // TODO maybe add title
 
@@ -21,6 +24,8 @@ public class ArticleDTO {
     private String text;
 
     private boolean top; //TODO add time
+
+    private LocalTime time;
 
 
 
@@ -72,5 +77,21 @@ public class ArticleDTO {
 
     public void setTop(boolean top) {
         this.top = top;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }
