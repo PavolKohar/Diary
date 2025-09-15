@@ -1,28 +1,41 @@
-package com.palci.DiaryApp.Models.DTO;
+package com.palci.DiaryApp.data;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-public class ArticleDTO {
+@Entity
+@Table(name = "Diary_records")
+public class ArticleEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long articleId;
 
+    @Column(nullable = false)
     private LocalDate date;
 
-    @NotBlank(message = "Fill in the description")
-    @Size(max = 140, message = "Description is too long")
+    @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private int mood;
 
-    @NotBlank(message = "Fill in the content")
+    @Column(nullable = false,columnDefinition = "TEXT")
     private String text;
 
-
+    // TODO - Add owner id (join column) USER ENTITY
 
     // Getters and setters
+
+
+    public long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(long articleId) {
+        this.articleId = articleId;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -54,13 +67,5 @@ public class ArticleDTO {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public long getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(long articleId) {
-        this.articleId = articleId;
     }
 }
