@@ -37,6 +37,7 @@ public class ArticleController {
         }
 
         articleService.createArticle(articleDTO);
+        redirectAttributes.addFlashAttribute("success","Article created");
 
         return "redirect:/article"; // TODO change to redirect
 

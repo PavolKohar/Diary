@@ -5,14 +5,16 @@
 <body class="d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/layout.html :: header}" ></header>
 
+<main class="flex-fill">
+
+    <div class="py-2 alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
 
 
-<h1>DashBoard page</h1>
 
 
 
 
-
+</main>
 
 
 <footer th:replace="~{fragments/layout.html :: footer}" ></footer>
