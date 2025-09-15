@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout.html :: head}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:replace="~{fragments/layout.html :: header}" ></header>
+
+<main class="flex-fill">
+    <div class="container my-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">New Diary Entry</h2>
+
+                <form>
+
+                    <!-- 1. Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Short Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="E.g. A beautiful walk in the park">
+                    </div>
+
+                    <!-- 2. Mood -->
+                    <div class="mb-3">
+                        <label for="mood" class="form-label">Mood (1 = bad, 10 = great): <span id="moodValue">5</span></label>
+                        <input type="range" class="form-range" min="1" max="10" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
+                    </div>
+
+                    <!-- 3. Date -->
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+
+                    <!-- 4. Article -->
+                    <div class="mb-3">
+                        <label for="article" class="form-label">Your Thoughts</label>
+                        <textarea class="form-control" id="article" rows="6" placeholder="Write your full diary entry here..."></textarea>
+                    </div>
+
+                    <!-- 5. Submit -->
+                    <button type="submit" class="btn btn-primary">Save Entry</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</main>
+
+
+<footer th:replace="~{fragments/layout.html :: footer}" ></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
