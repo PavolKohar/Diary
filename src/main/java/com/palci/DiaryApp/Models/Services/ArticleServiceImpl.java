@@ -28,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public ArticleDTO findLastEntry() {
-        ArticleEntity entity = articleRepository.findTopByOrderByDateDesc();
+        ArticleEntity entity = articleRepository.findTopByOrderByDateDescTimeDesc();
         return articleMapper.toDto(entity);
     }
 
