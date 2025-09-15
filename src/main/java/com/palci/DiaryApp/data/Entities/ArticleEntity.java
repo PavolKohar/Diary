@@ -3,6 +3,7 @@ package com.palci.DiaryApp.data.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "Diary_records")
@@ -11,6 +12,9 @@ public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long articleId;
+
+    @Column(nullable = false)
+    private String title;
 
     @Column(nullable = false)
     private LocalDate date;
@@ -26,6 +30,9 @@ public class ArticleEntity {
 
     @Column(nullable = false)
     private boolean top;
+
+    @Column(nullable = false)
+    private LocalTime time;
 
     // TODO - Add owner id (join column) USER ENTITY
 
@@ -78,5 +85,21 @@ public class ArticleEntity {
 
     public void setTop(boolean top) {
         this.top = top;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }
