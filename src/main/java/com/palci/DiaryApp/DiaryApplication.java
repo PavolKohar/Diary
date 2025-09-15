@@ -1,4 +1,4 @@
-package com.palci;
+package com.palci.DiaryApp;
 
 
 import org.springframework.boot.SpringApplication;
