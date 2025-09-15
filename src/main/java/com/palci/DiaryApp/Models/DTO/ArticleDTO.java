@@ -20,7 +20,7 @@ public class ArticleDTO {
     @NotBlank(message = "Fill in the content")
     private String text;
 
-    private boolean top;
+    private boolean top; //TODO add time
 
 
 
