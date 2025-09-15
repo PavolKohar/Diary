@@ -1,4 +1,4 @@
-package com.palci.DiaryApp.data;
+package com.palci.DiaryApp.data.Entities;
 
 import jakarta.persistence.*;
 
