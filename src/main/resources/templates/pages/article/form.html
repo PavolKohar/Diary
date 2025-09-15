@@ -19,6 +19,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Short Description</label>
                         <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="E.g. A beautiful walk in the park">
+                        <small class="text-danger" th:errors="*{description}"></small>
                     </div>
 
                     <!-- 2. Mood -->
@@ -37,6 +38,7 @@
                     <div class="mb-3">
                         <label for="article" class="form-label">Your Thoughts</label>
                         <textarea class="form-control" id="article" th:field="*{text}" rows="6" placeholder="Write your full diary entry here..."></textarea>
+                        <small class="text-danger" th:errors="*{text}"></small>
                     </div>
 
                     <!-- 5. Submit -->

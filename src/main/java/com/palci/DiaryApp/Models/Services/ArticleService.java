@@ -5,4 +5,6 @@ import com.palci.DiaryApp.Models.DTO.ArticleDTO;
 public interface ArticleService {
 
     void createArticle(ArticleDTO articleDTO);
+
+    ArticleDTO findLastEntry();
 }

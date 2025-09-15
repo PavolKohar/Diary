@@ -6,6 +6,7 @@ import com.palci.DiaryApp.Models.Services.ArticleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,9 @@ public class ArticleController {
     ArticleService articleService;
 
     @GetMapping
-    public String renderDashBoard(){
+    public String renderDashBoard(Model model){
+        ArticleDTO lastEntry = articleService.findLastEntry();
+        model.addAttribute("lastEntry",lastEntry);
         return "pages/article/dashboard";
     }
 

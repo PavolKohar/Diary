@@ -23,7 +23,11 @@ public class ArticleServiceImpl implements ArticleService{
 
     }
 
-
+    @Override
+    public ArticleDTO findLastEntry() {
+        ArticleEntity entity = articleRepository.findTopByOrderByDateDesc();
+        return articleMapper.toDto(entity);
+    }
 
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
