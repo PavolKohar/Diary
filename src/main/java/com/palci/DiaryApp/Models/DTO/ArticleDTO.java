@@ -1,6 +1,7 @@
 package com.palci.DiaryApp.Models.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class ArticleDTO {
     @Size(max = 100, message = "Title is too long")
     private String title;
 
+    @NotNull(message = "Fill in the date")
     private LocalDate date; // TODO maybe add title
 
     @NotBlank(message = "Fill in the description")
@@ -27,6 +29,7 @@ public class ArticleDTO {
 
     private boolean top; //TODO add time
 
+    @NotNull(message = "Fill in the time")
     private LocalTime time;
 
 

@@ -39,10 +39,12 @@
                         <div>
                             <label for="date" class="form-label">Date</label>
                             <input type="date" class="form-control" th:field="*{date}" id="date">
+                            <small class="text-danger" th:errors="*{date}"></small>
                         </div>
                         <div>
                             <label for="time" class="form-label">Time</label>
                             <input type="time" class="form-control" th:field="*{time}" id="time">
+                            <small class="text-danger" th:errors="*{time}"></small>
                         </div>
 
                     </div>
