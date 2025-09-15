@@ -8,6 +8,9 @@ import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 @Service
 public class ArticleServiceImpl implements ArticleService{
 
@@ -29,10 +32,16 @@ public class ArticleServiceImpl implements ArticleService{
         return articleMapper.toDto(entity);
     }
 
+    @Override
+    public List<ArticleDTO> getTopArticles() {
+        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+                .map(e->articleMapper.toDto(e))
+                .filter(ArticleDTO::isTop)
+                .toList();
+    }
+
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
         return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);
-
-
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -24,6 +26,8 @@ public class ArticleController {
     public String renderDashBoard(Model model){
         ArticleDTO lastEntry = articleService.findLastEntry();
         model.addAttribute("lastEntry",lastEntry);
+        List<ArticleDTO> topEntries = articleService.getTopArticles();
+        model.addAttribute("topEntries",topEntries);
         return "pages/article/dashboard";
     }
 

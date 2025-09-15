@@ -20,6 +20,8 @@ public class ArticleDTO {
     @NotBlank(message = "Fill in the content")
     private String text;
 
+    private boolean top;
+
 
 
     // Getters and setters
@@ -62,5 +64,13 @@ public class ArticleDTO {
 
     public void setArticleId(long articleId) {
         this.articleId = articleId;
+    }
+
+    public boolean isTop() {
+        return top;
+    }
+
+    public void setTop(boolean top) {
+        this.top = top;
     }
 }
