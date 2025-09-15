@@ -15,10 +15,16 @@
                       th:action="@{/article/create}"
                 th:object="${articleDTO}">
 
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="E.g. A beautiful walk in the park">
+                        <small class="text-danger" th:errors="*{title}"></small>
+                    </div>
+
                     <!-- 1. Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Short Description</label>
-                        <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="E.g. A beautiful walk in the park">
+                        <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="E.g. A beautiful walk in the park at monday evening.">
                         <small class="text-danger" th:errors="*{description}"></small>
                     </div>
 
@@ -29,9 +35,16 @@
                     </div>
 
                     <!-- 3. Date -->
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" th:field="*{date}" id="date">
+                    <div class="mb-3 d-flex justify-content-evenly">
+                        <div>
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" th:field="*{date}" id="date">
+                        </div>
+                        <div>
+                            <label for="time" class="form-label">Time</label>
+                            <input type="time" class="form-control" th:field="*{time}" id="time">
+                        </div>
+
                     </div>
 
                     <!-- 4. Article -->

@@ -10,6 +10,8 @@ public class ArticleDTO {
 
     private long articleId;
 
+    @NotBlank(message = "Fill in the title")
+    @Size(max = 100, message = "Title is too long")
     private String title;
 
     private LocalDate date; // TODO maybe add title
