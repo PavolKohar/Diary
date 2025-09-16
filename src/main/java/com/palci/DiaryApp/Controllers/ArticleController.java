@@ -24,6 +24,7 @@ public class ArticleController {
     ArticleService articleService;
     @Autowired
     ArticleMapper articleMapper;
+    @Autowired ArticleRepository articleRepository;
 
     @GetMapping
     public String renderDashBoard(Model model,RedirectAttributes redirectAttributes){
@@ -133,6 +134,13 @@ public class ArticleController {
         articleDTO.setArticleId(articleId);
         articleService.edit(articleDTO);
         redirectAttributes.addFlashAttribute("success","Article edited");
+
+        return "redirect:/article";
+    }
+
+    @GetMapping("remove/{articleId}")
+    public String removeArticle(@PathVariable long articleId){
+        articleRepository.deleteById(articleId);
 
         return "redirect:/article";
     }
