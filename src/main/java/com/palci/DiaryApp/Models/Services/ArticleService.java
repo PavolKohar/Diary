@@ -24,5 +24,7 @@ public interface ArticleService {
 
     ArticleDTO getById(long articleId);
 
+    void edit (ArticleDTO articleDTO);
+
 
 }

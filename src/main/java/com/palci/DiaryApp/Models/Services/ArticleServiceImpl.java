@@ -100,6 +100,13 @@ public class ArticleServiceImpl implements ArticleService{
         return articleMapper.toDto(fetchedArticle);
     }
 
+    @Override
+    public void edit(ArticleDTO articleDTO) {
+        ArticleEntity fetchedEntity = getArticleOrThrow(articleDTO.getArticleId());
+        articleMapper.updateArticleEntity(articleDTO,fetchedEntity);
+        articleRepository.save(fetchedEntity);
+    }
+
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
         return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);

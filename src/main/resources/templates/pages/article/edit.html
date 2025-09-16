@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout.html :: head}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:replace="~{fragments/layout.html :: header}" ></header>
+
+<main class="flex-fill">
+  <div class="container my-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Edit Entry</h2>
+
+        <form method="post"
+              th:action="@{'/article/edit/' + ${articleDTO.articleId}}"
+              th:object="${articleDTO}">
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="E.g. A beautiful walk in the park">
+            <small class="text-danger" th:errors="*{title}"></small>
+          </div>
+
+          <!-- 1. Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Short Description</label>
+            <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="E.g. A beautiful walk in the park at monday evening.">
+            <small class="text-danger" th:errors="*{description}"></small>
+          </div>
+
+          <!-- 2. Mood -->
+
+
+          <!-- 3. Date  -->
+          <div class="mb-3 d-flex justify-content-evenly">
+            <div class="mb-3">
+              <label for="mood" class="form-label">Mood (1 = bad, 10 = great): <span id="moodValue">5</span></label>
+              <input type="range" class="form-range" min="1" max="10" th:field="*{mood}" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
+            </div>
+            <div>
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" th:field="*{date}" id="date">
+              <small class="text-danger" th:errors="*{date}"></small>
+              <small class="text-success" th:text="${originDate}"></small>
+            </div>
+            <div>
+              <label for="time" class="form-label">Time</label>
+              <input type="time" class="form-control" th:field="*{time}" id="time">
+              <small class="text-danger" th:errors="*{time}"></small>
+            </div>
+
+          </div>
+
+          <!-- 4. Article -->
+          <div class="mb-3">
+            <label for="article" class="form-label">Your Thoughts</label>
+            <textarea class="form-control" id="article" th:field="*{text}" rows="15" placeholder="Write your full diary entry here..."></textarea>
+            <small class="text-danger" th:errors="*{text}"></small>
+          </div>
+
+          <!-- ✅ Checkbox for "Top" -->
+          <div class="form-check mb-3">
+            <input type="checkbox" th:field="*{top}" class="form-check-input" id="top">
+            <label class="form-check-label" for="top">Mark as Top</label>
+          </div>
+
+          <!-- 5. Submit -->
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+</main>
+
+
+<footer th:replace="~{fragments/layout.html :: footer}" ></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

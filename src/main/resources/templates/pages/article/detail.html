@@ -24,7 +24,7 @@
       <small class="text-muted" th:text="${article.date}"></small>
     </div>
 
-    <a href="#" class="btn btn-primary mt-2">Edit</a>
+    <a th:href="@{'/article/edit/' + ${article.articleId}}" class="btn btn-primary mt-2">Edit</a>
   </div>
 
 

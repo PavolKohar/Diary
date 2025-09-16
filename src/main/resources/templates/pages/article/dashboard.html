@@ -30,7 +30,7 @@
                     <p class="card-text" th:text="${lastEntry.description}"></p>
                     <div class="d-flex">
                         <a th:href="@{'/article/detail/' + ${lastEntry.articleId}}" class="btn btn-primary">Show</a>
-                        <a href="#" class="btn btn-primary">Edit</a>
+                        <a th:href="@{'/article/edit/' + ${lastEntry.articleId}}" class="btn btn-primary">Edit</a>
                     </div>
 
                 </div>

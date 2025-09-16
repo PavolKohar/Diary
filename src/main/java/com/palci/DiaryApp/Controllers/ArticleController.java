@@ -1,8 +1,10 @@
 package com.palci.DiaryApp.Controllers;
 
 
+import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
 import com.palci.DiaryApp.Models.Services.ArticleService;
+import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
@@ -12,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -19,6 +22,8 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     ArticleService articleService;
+    @Autowired
+    ArticleMapper articleMapper;
 
     @GetMapping
     public String renderDashBoard(Model model,RedirectAttributes redirectAttributes){
@@ -106,6 +111,30 @@ public class ArticleController {
         String daysAgoMessage = articleService.getDaysFromEntry(article);
         model.addAttribute("daysMessage",daysAgoMessage);
         return "pages/article/detail";
+    }
+
+    @GetMapping("edit/{articleId}")
+    public String renderEditForm(@PathVariable long articleId,@ModelAttribute ArticleDTO articleDTO,Model model){
+        ArticleDTO fetchedArticle = articleService.getById(articleId);
+        LocalDate originDate = fetchedArticle.getDate();
+        model.addAttribute("originDate",originDate);
+        articleMapper.updateArticleDTO(fetchedArticle,articleDTO);
+
+
+        return "pages/article/edit";
+    }
+
+    @PostMapping("edit/{articleId}")
+    public String updateArticle(@PathVariable long articleId,@Valid @ModelAttribute ArticleDTO articleDTO,BindingResult result,RedirectAttributes redirectAttributes,Model model){
+        if (result.hasErrors()){
+            return renderEditForm(articleId,articleDTO,model);
+        }
+
+        articleDTO.setArticleId(articleId);
+        articleService.edit(articleDTO);
+        redirectAttributes.addFlashAttribute("success","Article edited");
+
+        return "redirect:/article";
     }
 
 
