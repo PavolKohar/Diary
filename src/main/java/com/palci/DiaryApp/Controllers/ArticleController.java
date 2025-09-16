@@ -9,6 +9,7 @@ import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
+@Secured({"ROLE_ADMIN", "ROLE_USER"})
 @RequestMapping("/article")
 public class ArticleController {
     @Autowired
