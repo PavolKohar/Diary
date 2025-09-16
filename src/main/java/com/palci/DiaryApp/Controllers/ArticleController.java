@@ -5,11 +5,13 @@ import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
 import com.palci.DiaryApp.Models.Exceptions.ArticleNotFoundException;
 import com.palci.DiaryApp.Models.Services.ArticleService;
+import com.palci.DiaryApp.data.Entities.ArticleEntity;
 import com.palci.DiaryApp.data.Entities.UserEntity;
 import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -114,7 +116,13 @@ public class ArticleController {
     }
 
     @GetMapping("/detail/{articleId}")
-    public String renderDetail(@PathVariable long articleId,Model model){
+    public String renderDetail(@PathVariable long articleId,Model model,@AuthenticationPrincipal UserEntity user){
+        ArticleEntity entity = articleRepository.findById(articleId).orElseThrow(); // TODO - finish exception
+
+        if (entity.getOwner().getUserId() != user.getUserId()){
+            throw new AccessDeniedException("Not allowed");
+        }
+
         try {
             ArticleDTO article = articleService.getById(articleId);
             model.addAttribute("article",article);
@@ -128,8 +136,14 @@ public class ArticleController {
     }
 
     @GetMapping("edit/{articleId}")
-    public String renderEditForm(@PathVariable long articleId,@ModelAttribute ArticleDTO articleDTO,Model model){
-       try {
+    public String renderEditForm(@PathVariable long articleId,@ModelAttribute ArticleDTO articleDTO,Model model,@AuthenticationPrincipal UserEntity user){
+        ArticleEntity entity = articleRepository.findById(articleId).orElseThrow();
+
+        if (entity.getOwner().getUserId() != user.getUserId()){
+            throw new AccessDeniedException("Not allowed");
+        }
+
+        try {
            ArticleDTO fetchedArticle = articleService.getById(articleId);
            LocalDate originDate = fetchedArticle.getDate();
            model.addAttribute("originDate",originDate);
@@ -141,9 +155,16 @@ public class ArticleController {
     }
 
     @PostMapping("edit/{articleId}")
-    public String updateArticle(@PathVariable long articleId,@Valid @ModelAttribute ArticleDTO articleDTO,BindingResult result,RedirectAttributes redirectAttributes,Model model){
+    public String updateArticle(@PathVariable long articleId,@Valid @ModelAttribute ArticleDTO articleDTO,BindingResult result,RedirectAttributes redirectAttributes,Model model,@AuthenticationPrincipal UserEntity user){
+        ArticleEntity entity = articleRepository.findById(articleId).orElseThrow();
+
+        if (entity.getOwner().getUserId() != user.getUserId()){
+            throw new AccessDeniedException("Not Allowed");
+        }
+
+
         if (result.hasErrors()){
-            return renderEditForm(articleId,articleDTO,model);
+            return renderEditForm(articleId,articleDTO,model,user);
         }
 
         articleDTO.setArticleId(articleId);
@@ -154,7 +175,12 @@ public class ArticleController {
     }
 
     @GetMapping("remove/{articleId}")
-    public String removeArticle(@PathVariable long articleId){
+    public String removeArticle(@PathVariable long articleId,@AuthenticationPrincipal UserEntity user){
+        ArticleEntity entity = articleRepository.findById(articleId).orElseThrow();
+        if (entity.getOwner().getUserId() != user.getUserId()){
+            throw new AccessDeniedException("Not allowed");
+        }
+
         articleRepository.deleteById(articleId); // TODO edit this method to throw exception if entry does not exist
 
         return "redirect:/article";
