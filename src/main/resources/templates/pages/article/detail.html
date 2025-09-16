@@ -24,7 +24,11 @@
       <small class="text-muted" th:text="${article.date}"></small>
     </div>
 
-    <a th:href="@{'/article/edit/' + ${article.articleId}}" class="btn btn-primary mt-2">Edit</a>
+    <div class="d-flex gap-2">
+      <a th:href="@{'/article/edit/' + ${article.articleId}}" class="btn btn-primary mt-2">Edit</a>
+      <a th:href="@{'/article/remove/' + ${article.articleId}}" class="btn btn-danger mt-2">Remove</a>
+    </div>
+
   </div>
 
 
