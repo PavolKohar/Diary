@@ -99,6 +99,11 @@ public class ArticleController {
         return "pages/article/topRecords";
     }
 
+    @GetMapping("/detail/{articleId}")
+    public String renderDetail(@PathVariable long articleId){
+        return "pages/article/detail";
+    }
+
 
 
 }

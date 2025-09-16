@@ -28,7 +28,11 @@
                         <span th:text="${lastEntry.mood}"></span>
                     </h5>
                     <p class="card-text" th:text="${lastEntry.description}"></p>
-                    <a href="#" class="btn btn-primary">Edit</a>
+                    <div class="d-flex">
+                        <a th:href="@{'/article/detail/' + ${lastEntry.articleId}}" class="btn btn-primary">Show</a>
+                        <a href="#" class="btn btn-primary">Edit</a>
+                    </div>
+
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between">
                     <span th:text="${daysMessage}"></span>
@@ -61,7 +65,7 @@
                             <td th:text="${topEntry.title}">Sample description</td>
                             <td th:text="${topEntry.mood}">7</td>
                             <td th:text="${topEntry.date}">2025-09-12</td>
-                            <td><a href="#" class="btn btn-sm btn-primary">Show</a></td>
+                            <td><a th:href="@{'/article/detail/' + ${topEntry.articleId}}" class="btn btn-sm btn-primary">Show</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -89,7 +93,7 @@
                             <td th:text="${entry.title}">Sample description</td>
                             <td th:text="${entry.mood}">7</td>
                             <td th:text="${entry.date}">2025-09-12</td>
-                            <td><a href="#" class="btn btn-sm btn-primary">Show</a></td>
+                            <td><a th:href="@{'/article/detail/' + ${entry.articleId}}" class="btn btn-sm btn-primary">Show</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -114,7 +118,7 @@
                     <td th:text="${entry.mood}">7</td>
                     <td th:text="${entry.date}">2025-09-12</td>
                     <td th:text="${entry.time}"></td>
-                    <td><a href="#" class="btn btn-sm btn-primary">Show</a></td>
+                    <td><a th:href="@{'/article/detail/' + ${entry.articleId}}" class="btn btn-sm btn-primary">Show</a></td>
                 </tr>
                 </tbody>
             </table>
