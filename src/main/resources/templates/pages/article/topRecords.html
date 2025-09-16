@@ -5,6 +5,36 @@
 <body class="d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/layout.html :: header}" ></header>
 
+<main class="flex-fill">
+
+    <h1 class="text-center">TOP RECORDS ⭐️</h1>
+
+
+    <div class="container text-center mt-4" th:if="${#lists.isEmpty(records)}" >
+      <h1>No top records yet</h1>
+      <a th:href="@{/article/create}" class="btn btn-primary btn-lg">Add your first record</a>
+    </div>
+
+    <div th:if="${!#lists.isEmpty(records)}">
+      <div class="container mt-2">
+        <div class="card" th:each="record : ${records}">
+          <div class="card-header" th:text="${record.title}">
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between">
+              <span th:text="${record.description}"></span>
+              <span th:text="${record.mood}"></span>
+            </h5>
+            <p class="card-text" th:text="${record.description}"></p>
+            <a href="#" class="btn btn-primary">Edit</a>
+          </div>
+          <div class="card-footer text-muted d-flex justify-content-between">
+            <span th:text="${record.date}"></span>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
@@ -13,16 +43,7 @@
 
 
 
-
-<h1>TOP RECORDS ⭐️</h1>
-
-
-
-
-
-
-
-
+</main>
 
 <footer th:replace="~{fragments/layout.html :: footer}" ></footer>
 <script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>

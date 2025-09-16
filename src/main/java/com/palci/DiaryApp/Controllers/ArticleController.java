@@ -93,7 +93,9 @@ public class ArticleController {
     }
 
     @GetMapping("/top-records")
-    public String renderTopRecords(){
+    public String renderTopRecords(Model model){
+        List<ArticleDTO> topArticles = articleService.getTopArticles();
+        model.addAttribute("records",topArticles);
         return "pages/article/topRecords";
     }
 
