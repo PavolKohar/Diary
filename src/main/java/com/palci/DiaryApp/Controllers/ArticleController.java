@@ -148,7 +148,7 @@ public class ArticleController {
 
     @GetMapping("remove/{articleId}")
     public String removeArticle(@PathVariable long articleId){
-        articleRepository.deleteById(articleId);
+        articleRepository.deleteById(articleId); // TODO edit this method to throw exception if entry does not exist
 
         return "redirect:/article";
     }
