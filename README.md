@@ -83,6 +83,13 @@ http://localhost:8080
 ```
 
 ---
+### Ideas to improve
+- Add calendar view for entries 
+- Add chart view for mood 
+- Finish about-us and contact page 
+- Filter by date 
+- Sort by date
+
 
 ## 👤 Author
 
