@@ -3,6 +3,7 @@ package com.palci.DiaryApp.Controllers;
 
 import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
+import com.palci.DiaryApp.Models.Exceptions.ArticleNotFoundException;
 import com.palci.DiaryApp.Models.Services.ArticleService;
 import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import jakarta.validation.Valid;
@@ -107,22 +108,29 @@ public class ArticleController {
 
     @GetMapping("/detail/{articleId}")
     public String renderDetail(@PathVariable long articleId,Model model){
-        ArticleDTO article = articleService.getById(articleId);
-        model.addAttribute("article",article);
-        String daysAgoMessage = articleService.getDaysFromEntry(article);
-        model.addAttribute("daysMessage",daysAgoMessage);
-        return "pages/article/detail";
+        try {
+            ArticleDTO article = articleService.getById(articleId);
+            model.addAttribute("article",article);
+            String daysAgoMessage = articleService.getDaysFromEntry(article);
+            model.addAttribute("daysMessage",daysAgoMessage);
+            return "pages/article/detail";
+        }catch (ArticleNotFoundException e ){
+            return "redirect:/article";
+        }
+
     }
 
     @GetMapping("edit/{articleId}")
     public String renderEditForm(@PathVariable long articleId,@ModelAttribute ArticleDTO articleDTO,Model model){
-        ArticleDTO fetchedArticle = articleService.getById(articleId);
-        LocalDate originDate = fetchedArticle.getDate();
-        model.addAttribute("originDate",originDate);
-        articleMapper.updateArticleDTO(fetchedArticle,articleDTO);
-
-
-        return "pages/article/edit";
+       try {
+           ArticleDTO fetchedArticle = articleService.getById(articleId);
+           LocalDate originDate = fetchedArticle.getDate();
+           model.addAttribute("originDate",originDate);
+           articleMapper.updateArticleDTO(fetchedArticle,articleDTO);
+           return "pages/article/edit";
+       }catch (ArticleNotFoundException e){
+           return "redirect:/article";
+       }
     }
 
     @PostMapping("edit/{articleId}")
