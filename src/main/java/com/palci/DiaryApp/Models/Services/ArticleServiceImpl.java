@@ -75,11 +75,16 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public String getDaysFromEntry(ArticleDTO articleDTO) {
         LocalDate today = LocalDate.now();
-        System.out.println(today);
-        LocalDate entryDate = articleDTO.getDate();
-        System.out.println(entryDate);
-        int days = Period.between(today,entryDate).getDays();
-        System.out.println(days); // TODO Delete print and get days to absolute (return -1. values)
+
+        LocalDate entryDate;
+        try {
+            entryDate  = articleDTO.getDate();
+        }catch (NullPointerException e){
+            entryDate = today;
+        }
+
+        int days = Period.between(entryDate,today).getDays();
+
 
         switch (days){
             case 0 -> {
