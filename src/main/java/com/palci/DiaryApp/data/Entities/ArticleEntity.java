@@ -36,6 +36,10 @@ public class ArticleEntity {
 
     // TODO - Add owner id (join column) USER ENTITY
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity owner;
+
     // Getters and setters
 
 
@@ -101,5 +105,13 @@ public class ArticleEntity {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public UserEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
     }
 }
