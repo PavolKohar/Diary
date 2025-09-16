@@ -92,6 +92,11 @@ public class ArticleController {
 
     }
 
+    @GetMapping("/top-records")
+    public String renderTopRecords(){
+        return "pages/article/topRecords";
+    }
+
 
 
 }
