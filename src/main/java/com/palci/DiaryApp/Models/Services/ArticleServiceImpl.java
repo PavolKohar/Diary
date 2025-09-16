@@ -8,6 +8,8 @@ import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
@@ -68,6 +70,28 @@ public class ArticleServiceImpl implements ArticleService{
                 .map(e->articleMapper.toDto(e))
                 .filter(d->d.getMood()<=4)
                 .toList();
+    }
+
+    @Override
+    public String getDaysFromEntry(ArticleDTO articleDTO) {
+        LocalDate today = LocalDate.now();
+        System.out.println(today);
+        LocalDate entryDate = articleDTO.getDate();
+        System.out.println(entryDate);
+        int days = Period.between(today,entryDate).getDays();
+        System.out.println(days);
+
+        switch (days){
+            case 0 -> {
+                return "today";
+            }
+            case 1 -> {
+                return days + " day ago";
+            }
+            default -> {
+                return days + " days ago";
+            }
+        }
     }
 
     // Helping method

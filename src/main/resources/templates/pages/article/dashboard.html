@@ -30,7 +30,9 @@
                     <p class="card-text" th:text="${lastEntry.description}"></p>
                     <a href="#" class="btn btn-primary">Edit</a>
                 </div>
-                <div class="card-footer text-muted" th:text="${lastEntry.date}">
+                <div class="card-footer text-muted d-flex justify-content-between">
+                    <span th:text="${daysMessage}"></span>
+                    <span th:text="${lastEntry.date}"></span>
                 </div>
             </div>
         </div>

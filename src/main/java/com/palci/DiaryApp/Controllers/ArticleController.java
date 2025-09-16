@@ -31,6 +31,8 @@ public class ArticleController {
             model.addAttribute("allEntries",allEntries);
             List<ArticleDTO> topMoodEntries = articleService.getTopMoodEntries();
             model.addAttribute("moodTop",topMoodEntries);
+            String daysAgoMessage = articleService.getDaysFromEntry(lastEntry);
+            model.addAttribute("daysMessage",daysAgoMessage);
             return "pages/article/dashboard";
         }catch (SpelEvaluationException e ){
             redirectAttributes.addFlashAttribute("error","Not record yet");
@@ -48,6 +50,8 @@ public class ArticleController {
             model.addAttribute("topEntries",topEntries);
             List<ArticleDTO> allEntries = articleService.getAllArticles();
             model.addAttribute("allEntries",allEntries);
+            String daysAgoMessage = articleService.getDaysFromEntry(lastEntry);
+            model.addAttribute("daysMessage",daysAgoMessage);
 
             List<ArticleDTO> byMood;
             switch (filter){

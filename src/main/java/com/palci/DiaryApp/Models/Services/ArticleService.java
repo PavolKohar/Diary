@@ -20,5 +20,7 @@ public interface ArticleService {
 
     List<ArticleDTO> getLowMoodEntries();
 
+    String getDaysFromEntry(ArticleDTO articleDTO);
+
 
 }

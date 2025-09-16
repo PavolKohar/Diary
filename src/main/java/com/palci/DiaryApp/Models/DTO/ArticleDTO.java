@@ -1,8 +1,6 @@
 package com.palci.DiaryApp.Models.DTO;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,6 +14,7 @@ public class ArticleDTO {
     private String title;
 
     @NotNull(message = "Fill in the date")
+    @PastOrPresent(message = "Date can not be in future")
     private LocalDate date;
 
     @NotBlank(message = "Fill in the description")
