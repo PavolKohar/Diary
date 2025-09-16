@@ -16,7 +16,7 @@ public class ArticleDTO {
     private String title;
 
     @NotNull(message = "Fill in the date")
-    private LocalDate date; // TODO maybe add title
+    private LocalDate date;
 
     @NotBlank(message = "Fill in the description")
     @Size(max = 140, message = "Description is too long")
@@ -27,7 +27,7 @@ public class ArticleDTO {
     @NotBlank(message = "Fill in the content")
     private String text;
 
-    private boolean top; //TODO add time
+    private boolean top;
 
     @NotNull(message = "Fill in the time")
     private LocalTime time;
