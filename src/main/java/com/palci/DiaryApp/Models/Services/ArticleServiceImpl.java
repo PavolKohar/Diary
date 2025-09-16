@@ -94,6 +94,12 @@ public class ArticleServiceImpl implements ArticleService{
         }
     }
 
+    @Override
+    public ArticleDTO getById(long articleId) {
+        ArticleEntity fetchedArticle = getArticleOrThrow(articleId);
+        return articleMapper.toDto(fetchedArticle);
+    }
+
     // Helping method
     private ArticleEntity getArticleOrThrow(long articleId){
         return articleRepository.findById(articleId).orElseThrow(ArticleNotFoundException::new);

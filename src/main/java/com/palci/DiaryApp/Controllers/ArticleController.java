@@ -100,7 +100,11 @@ public class ArticleController {
     }
 
     @GetMapping("/detail/{articleId}")
-    public String renderDetail(@PathVariable long articleId){
+    public String renderDetail(@PathVariable long articleId,Model model){
+        ArticleDTO article = articleService.getById(articleId);
+        model.addAttribute("article",article);
+        String daysAgoMessage = articleService.getDaysFromEntry(article);
+        model.addAttribute("daysMessage",daysAgoMessage);
         return "pages/article/detail";
     }
 

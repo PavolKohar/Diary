@@ -22,5 +22,7 @@ public interface ArticleService {
 
     String getDaysFromEntry(ArticleDTO articleDTO);
 
+    ArticleDTO getById(long articleId);
+
 
 }

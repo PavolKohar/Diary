@@ -6,16 +6,25 @@
 <header th:replace="~{fragments/layout.html :: header}" ></header>
 
 <main class="flex-fill">
-  <div class="container">
-    <h1>Detail</h1>
+  <div class="container mt-3">
+    <h1 th:text="${article.title}" >Detail</h1>
     <hr>
-    <h2>Description and mood</h2>
+    <div class="d-flex justify-content-between">
+      <h2 th:text="${article.description}" >Description and mood</h2>
+      <h2 th:text="${article.mood}"></h2>
+    </div>
+
     <hr>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam atque corporis deserunt dolorem expedita explicabo fuga laboriosam libero minus nemo, non nulla quidem quo, similique temporibus veniam voluptate, voluptatibus!</p>
+    <p th:utext="${article.text}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam atque corporis deserunt dolorem expedita explicabo fuga laboriosam libero minus nemo, non nulla quidem quo, similique temporibus veniam voluptate, voluptatibus!</p>
 
 
     <hr>
-    <a href="#" class="btn btn-primary">Edit</a>
+    <div class="d-flex justify-content-between">
+      <small class="text-muted" th:text="${daysMessage}"></small>
+      <small class="text-muted" th:text="${article.date}"></small>
+    </div>
+
+    <a href="#" class="btn btn-primary mt-2">Edit</a>
   </div>
 
 
