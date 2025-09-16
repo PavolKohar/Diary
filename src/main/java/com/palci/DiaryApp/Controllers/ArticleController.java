@@ -119,6 +119,7 @@ public class ArticleController {
     public String renderDetail(@PathVariable long articleId,Model model,@AuthenticationPrincipal UserEntity user){
         ArticleEntity entity = articleRepository.findById(articleId).orElseThrow(); // TODO - finish exception
 
+        // Authorization
         if (entity.getOwner().getUserId() != user.getUserId()){
             throw new AccessDeniedException("Not allowed");
         }
