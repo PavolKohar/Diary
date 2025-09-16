@@ -32,15 +32,15 @@ public class ArticleController {
     @Autowired ArticleRepository articleRepository;
 
     @GetMapping
-    public String renderDashBoard(Model model,RedirectAttributes redirectAttributes){
+    public String renderDashBoard(Model model,RedirectAttributes redirectAttributes,@AuthenticationPrincipal UserEntity user){
         try {
-            ArticleDTO lastEntry = articleService.findLastEntry();
+            ArticleDTO lastEntry = articleService.findLastEntry(user);
             model.addAttribute("lastEntry",lastEntry);
-            List<ArticleDTO> topEntries = articleService.getTopArticles();
+            List<ArticleDTO> topEntries = articleService.getTopArticles(user);
             model.addAttribute("topEntries",topEntries);
-            List<ArticleDTO> allEntries = articleService.getAllArticles();
+            List<ArticleDTO> allEntries = articleService.getAllArticles(user);
             model.addAttribute("allEntries",allEntries);
-            List<ArticleDTO> topMoodEntries = articleService.getTopMoodEntries();
+            List<ArticleDTO> topMoodEntries = articleService.getTopMoodEntries(user);
             model.addAttribute("moodTop",topMoodEntries);
             String daysAgoMessage = articleService.getDaysFromEntry(lastEntry);
             model.addAttribute("daysMessage",daysAgoMessage);
@@ -53,23 +53,23 @@ public class ArticleController {
     }
 
     @GetMapping("/{filter}")
-    public String renderDashBoardWithFilterMood(@PathVariable String filter, Model model,RedirectAttributes redirectAttributes){
+    public String renderDashBoardWithFilterMood(@PathVariable String filter, Model model,RedirectAttributes redirectAttributes,@AuthenticationPrincipal UserEntity user){
         try {
-            ArticleDTO lastEntry = articleService.findLastEntry();
+            ArticleDTO lastEntry = articleService.findLastEntry(user);
             model.addAttribute("lastEntry",lastEntry);
-            List<ArticleDTO> topEntries = articleService.getTopArticles();
+            List<ArticleDTO> topEntries = articleService.getTopArticles(user);
             model.addAttribute("topEntries",topEntries);
-            List<ArticleDTO> allEntries = articleService.getAllArticles();
+            List<ArticleDTO> allEntries = articleService.getAllArticles(user);
             model.addAttribute("allEntries",allEntries);
             String daysAgoMessage = articleService.getDaysFromEntry(lastEntry);
             model.addAttribute("daysMessage",daysAgoMessage);
 
             List<ArticleDTO> byMood;
             switch (filter){
-                case "top-mood" -> byMood = articleService.getTopMoodEntries();
-                case "mid-mood" -> byMood = articleService.getMidMoodEntries();
-                case "low-mood" -> byMood = articleService.getLowMoodEntries();
-                default -> byMood = articleService.getAllArticles();
+                case "top-mood" -> byMood = articleService.getTopMoodEntries(user);
+                case "mid-mood" -> byMood = articleService.getMidMoodEntries(user);
+                case "low-mood" -> byMood = articleService.getLowMoodEntries(user);
+                default -> byMood = articleService.getAllArticles(user);
             }
 
             model.addAttribute("moodTop",byMood);
@@ -107,8 +107,8 @@ public class ArticleController {
     }
 
     @GetMapping("/top-records")
-    public String renderTopRecords(Model model){
-        List<ArticleDTO> topArticles = articleService.getTopArticles();
+    public String renderTopRecords(Model model,@AuthenticationPrincipal UserEntity user){
+        List<ArticleDTO> topArticles = articleService.getTopArticles(user);
         model.addAttribute("records",topArticles);
         return "pages/article/topRecords";
     }

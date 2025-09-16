@@ -34,45 +34,45 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
     @Override
-    public ArticleDTO findLastEntry() {
-        ArticleEntity entity = articleRepository.findTopByOrderByDateDescTimeDesc();
+    public ArticleDTO findLastEntry(UserEntity user) {
+        ArticleEntity entity = articleRepository.findTopByOwnerOrderByDateDescTimeDesc(user);
         return articleMapper.toDto(entity);
     }
 
     @Override
-    public List<ArticleDTO> getTopArticles() {
-        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+    public List<ArticleDTO> getTopArticles(UserEntity user) {
+        return StreamSupport.stream(articleRepository.findAllByOwner(user).spliterator(),false)
                 .map(e->articleMapper.toDto(e))
                 .filter(ArticleDTO::isTop)
                 .toList();
     }
 
     @Override
-    public List<ArticleDTO> getAllArticles() {
-        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+    public List<ArticleDTO> getAllArticles(UserEntity user) {
+        return StreamSupport.stream(articleRepository.findAllByOwner(user).spliterator(),false)
                 .map(e->articleMapper.toDto(e))
                 .toList();
     }
 
     @Override
-    public List<ArticleDTO> getTopMoodEntries() {
-        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+    public List<ArticleDTO> getTopMoodEntries(UserEntity user) {
+        return StreamSupport.stream(articleRepository.findAllByOwner(user).spliterator(),false)
                 .map(e->articleMapper.toDto(e))
                 .filter(d->d.getMood()>=7)
                 .toList();
     }
 
     @Override
-    public List<ArticleDTO> getMidMoodEntries() {
-        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+    public List<ArticleDTO> getMidMoodEntries(UserEntity user) {
+        return StreamSupport.stream(articleRepository.findAllByOwner(user).spliterator(),false)
                 .map(e->articleMapper.toDto(e))
                 .filter(d->d.getMood()<7 && d.getMood()>4)
                 .toList();
     }
 
     @Override
-    public List<ArticleDTO> getLowMoodEntries() {
-        return StreamSupport.stream(articleRepository.findAll().spliterator(),false)
+    public List<ArticleDTO> getLowMoodEntries(UserEntity user) {
+        return StreamSupport.stream(articleRepository.findAllByOwner(user).spliterator(),false)
                 .map(e->articleMapper.toDto(e))
                 .filter(d->d.getMood()<=4)
                 .toList();
