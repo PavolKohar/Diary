@@ -4,7 +4,9 @@ import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
 import com.palci.DiaryApp.Models.Exceptions.ArticleNotFoundException;
 import com.palci.DiaryApp.data.Entities.ArticleEntity;
+import com.palci.DiaryApp.data.Entities.UserEntity;
 import com.palci.DiaryApp.data.Repositories.ArticleRepository;
+import com.palci.DiaryApp.data.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +22,14 @@ public class ArticleServiceImpl implements ArticleService{
     ArticleMapper articleMapper;
     @Autowired
     ArticleRepository articleRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
-    public void createArticle(ArticleDTO articleDTO) {
+    public void createArticle(ArticleDTO articleDTO,String userEmail) {
+        UserEntity owner = userRepository.findByEmail(userEmail).orElseThrow(()->new RuntimeException("User not found"));
         ArticleEntity entry = articleMapper.toEntity(articleDTO); // TODO - Figure out how to encrypt and decrypt articles with AESUtil.java
+        entry.setOwner(owner);
         articleRepository.save(entry);
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ArticleService {
 
-    void createArticle(ArticleDTO articleDTO);
+    void createArticle(ArticleDTO articleDTO,String userEmail);
 
     ArticleDTO findLastEntry();
 

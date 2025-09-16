@@ -5,11 +5,13 @@ import com.palci.DiaryApp.Models.ArticleMapper;
 import com.palci.DiaryApp.Models.DTO.ArticleDTO;
 import com.palci.DiaryApp.Models.Exceptions.ArticleNotFoundException;
 import com.palci.DiaryApp.Models.Services.ArticleService;
+import com.palci.DiaryApp.data.Entities.UserEntity;
 import com.palci.DiaryApp.data.Repositories.ArticleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -88,12 +90,15 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String createEntry(@Valid @ModelAttribute ArticleDTO articleDTO, BindingResult result, RedirectAttributes redirectAttributes){
+    public String createEntry(@Valid @ModelAttribute ArticleDTO articleDTO, BindingResult result, RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserEntity user){
+        String email = user.getEmail();
+
         if (result.hasErrors()){
             return renderCreateForm(articleDTO);
         }
 
-        articleService.createArticle(articleDTO);
+
+        articleService.createArticle(articleDTO,email);
         redirectAttributes.addFlashAttribute("success","Article created");
 
         return "redirect:/article"; // TODO change to redirect
