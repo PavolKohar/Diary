@@ -6,7 +6,7 @@
 <header th:replace="~{fragments/layout.html :: header}" ></header>
 
 <main class="flex-fill">
-    <div class="container my-5">
+    <div class="container my-4">
         <div class="card shadow-sm">
             <div class="card-body">
                 <h2 class="card-title mb-4">New Diary Entry</h2>
@@ -29,13 +29,14 @@
                     </div>
 
                     <!-- 2. Mood -->
-                    <div class="mb-3">
-                        <label for="mood" class="form-label">Mood (1 = bad, 10 = great): <span id="moodValue">5</span></label>
-                        <input type="range" class="form-range" min="1" max="10" th:field="*{mood}" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
-                    </div>
+
 
                     <!-- 3. Date  -->
                     <div class="mb-3 d-flex justify-content-evenly">
+                        <div class="mb-3">
+                            <label for="mood" class="form-label">Mood (1 = bad, 10 = great): <span id="moodValue">5</span></label>
+                            <input type="range" class="form-range" min="1" max="10" th:field="*{mood}" id="mood" value="5" oninput="document.getElementById('moodValue').textContent = this.value">
+                        </div>
                         <div>
                             <label for="date" class="form-label">Date</label>
                             <input type="date" class="form-control" th:field="*{date}" id="date">
@@ -52,7 +53,7 @@
                     <!-- 4. Article -->
                     <div class="mb-3">
                         <label for="article" class="form-label">Your Thoughts</label>
-                        <textarea class="form-control" id="article" th:field="*{text}" rows="6" placeholder="Write your full diary entry here..."></textarea>
+                        <textarea class="form-control" id="article" th:field="*{text}" rows="15" placeholder="Write your full diary entry here..."></textarea>
                         <small class="text-danger" th:errors="*{text}"></small>
                     </div>
 
