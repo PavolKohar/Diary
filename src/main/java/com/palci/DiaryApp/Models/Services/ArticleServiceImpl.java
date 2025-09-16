@@ -21,9 +21,8 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public void createArticle(ArticleDTO articleDTO) {
-        ArticleEntity entry = articleMapper.toEntity(articleDTO);
+        ArticleEntity entry = articleMapper.toEntity(articleDTO); // TODO - Figure out how to encrypt and decrypt articles with AESUtil.java
         articleRepository.save(entry);
-
     }
 
     @Override
