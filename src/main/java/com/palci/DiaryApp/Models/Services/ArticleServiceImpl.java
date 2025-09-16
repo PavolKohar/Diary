@@ -79,7 +79,7 @@ public class ArticleServiceImpl implements ArticleService{
         LocalDate entryDate = articleDTO.getDate();
         System.out.println(entryDate);
         int days = Period.between(today,entryDate).getDays();
-        System.out.println(days);
+        System.out.println(days); // TODO Delete print and get days to absolute (return -1. values)
 
         switch (days){
             case 0 -> {
